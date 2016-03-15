@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Musician Buttons</title>
+</head>
+
+<body>
+    <button data-musician="drake">drake</button>
+    <button data-musician="j cole">j cole</button>
+    <button data-musician="kanye west">kanye west</button>
+    <button data-musician="frank ocean">frank ocean</button>
+    <button data musician="jay z">jay z</button>
+    <button data-musician="kendrick lamar">kendrick lamar</button>
+    <button data-musician="kid cudi">kid cudi</button>
+    <button data-musician="future">future</button>
+    <button data-musician="miguel">miguel</button>
+    <button data-musician="nas">nas</button>
+    <div id="gifsAppearHere">
+    </div>
+    <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+    <script type="text/javascript">
+    $('button').on('click', function() {
+        var musician = $(this).data('Musician');
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + Musician + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+        $.ajax({
+                url: queryURL,
+                method: 'GET'
+            })
+            .done(function(response) {
+               
+                console.log(response)
+
+               
+                var results= response.data
+                
+
+                for (var i = 0; i < results.length; i++) {
+
+                   
+                   var p = $('<p>').text(results[i].rating)
+                   var musicianImage = $('<img>').attr('src', results[i].images.fixed_height.url)
+                   $(musicianDiv).append(p)
+                   $(musicianDiv).append(animalImage)
+                   $('#gifsAppearHere').prepend(musicianDiv)
+                    
+                }
+
+            });
+    });
+    </script>
+</body>
+
+</html>
